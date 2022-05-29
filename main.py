@@ -24,17 +24,22 @@ async def send_welcome(message: types.Message):
     """
     await message.reply(
         "Добро пожаловать!\n"
-        "I'm MoneyKeeperBot!\n")
+        "I'm MoneyKeeperBot!\n"
+        "Пример добавления расхода: 'такси 50'\n"
+        )
 
 
 @dp.message_handler()
 async def add_expense(message: types.Message):
     try:
         expense = expenses.add_expense(message.text)
+        t = f'Мы на верном пути, {expense}'
+        await message.answer(t)
     except:
         pass
+    
 
-        await message.reply(message.text)
+        
 
 
 

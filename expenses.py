@@ -1,5 +1,10 @@
 #money_keeper
 
+#import db
+
+from unicodedata import category
+
+
 categories = {
     'food':['еда', 'продукты'],
     'transport':['транспорт','метро', 'такси', 'маршрутка', 'автобус'],
@@ -12,17 +17,20 @@ categories = {
     'gos_uslugi' : ['налоги', 'квартплата'],
     'auto' : ['авто', 'автомобиль', 'машина', 'бензин', 'запчасти'],
     'trip' : ['путешествия', 'арзамас'],
-    'restaurant' : ['ресторан', 'кафе', 'кофе', 'шаверма']
+    'restaurant' : ['ресторан', 'кафе', 'кофе', 'шаверма'],
+    'other' : ['другое']
 }
-print(list(categories.values()))
+#print(list(categories.values()))
 #users_message = 'еда 250'
 
 
 def add_expense(users_message):
     parsed_message = parse_message(users_message)
     find_categories = add_categories(parsed_message[0])
+        #send_exp_cat_in_db = db.add_expense_and_category_in_db()
+            
 
-    return print(parsed_message,find_categories)
+    return f'{parsed_message}, {find_categories}'
 
 
 
@@ -36,4 +44,7 @@ def parse_message(users_message):
 def add_categories(first_part_message):
     for category, category_values in categories.items():
         if first_part_message.lower() in category_values:
-            return f'{category}'
+            if category is not None:
+                return f'{category}'
+            else:
+                return f"Брат, такой категории нет..."
