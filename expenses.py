@@ -1,6 +1,6 @@
 #money_keeper
 
-#import db
+import db
 
 from unicodedata import category
 
@@ -20,17 +20,15 @@ categories = {
     'restaurant' : ['ресторан', 'кафе', 'кофе', 'шаверма'],
     'other' : ['другое']
 }
-#print(list(categories.values()))
-#users_message = 'еда 250'
 
 
 def add_expense(users_message):
     parsed_message = parse_message(users_message)
     find_categories = add_categories(parsed_message[0])
-        #send_exp_cat_in_db = db.add_expense_and_category_in_db()
+    send_exp_cat_in_db = db.add_expense_and_category_in_db(parsed_message[1], find_categories)
             
 
-    return f'{parsed_message}, {find_categories}'
+    return f'{parsed_message[1]}, {find_categories}'
 
 
 
