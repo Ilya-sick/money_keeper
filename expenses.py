@@ -9,14 +9,14 @@ categories = {
     'food':['еда', 'продукты'],
     'transport':['транспорт','метро', 'такси', 'маршрутка', 'автобус'],
     'clothes' : ['одежда', 'шмотки', 'обувь'],
-    'communications' : ['телефон', 'связь', 'интернет', 'билайн'],
+    'communications' : ['связь', 'телефон', 'интернет', 'билайн'],
     'baby' : ['ребенок', 'ребёнок', 'малыш', 'памперсы', 'подгузники', 'смесь'],
-    'money_transfer' : ['перевод', 'скинул', 'перевел', 'перевёл'],
+    'money_transfer' : ['переводы', 'перевод', 'скинул', 'перевел', 'перевёл'],
     'apartments' : ['квартира', 'мебель', 'леруа'],
     'pharmacy' : ['аптека', 'таблетки'],
     'gos_uslugi' : ['налоги', 'квартплата'],
-    'auto' : ['авто', 'автомобиль', 'машина', 'бензин', 'запчасти'],
-    'trip' : ['путешествия', 'арзамас'],
+    'auto' : ['автомобиль', 'веста', 'авто', 'машина', 'бензин', 'запчасти'],
+    'trip' : ['путешествия', 'арзамас', 'питер'],
     'restaurant' : ['ресторан', 'кафе', 'кофе', 'шаверма'],
     'other' : ['другое']
 }
@@ -27,7 +27,7 @@ def add_expense(users_message):
     find_categories = add_categories(parsed_message[0])
     send_exp_cat_in_db = db.add_expense_and_category_in_db(parsed_message[1], find_categories)
             
-    return f'Ваш расход - {parsed_message[1]}р. добавлен в категорию {find_categories}!'
+    return f'Ваш расход - {parsed_message[1]}р. добавлен в категорию {categories[find_categories][0]}!'
 
 
 def parse_message(users_message):

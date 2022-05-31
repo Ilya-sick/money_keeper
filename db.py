@@ -11,6 +11,6 @@ def add_expense_and_category_in_db(message, find_cat):
     cur.execute(
         f"INSERT INTO expenses"
         f"({find_cat})"
-        f"VALUES ({message})"
+        f"VALUES (?)", (f"{message}",)
         )
     conn.commit()
