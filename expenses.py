@@ -6,26 +6,23 @@ from unicodedata import category
 
 
 categories = {
-    'food':['еда', 'продукты'],
-    'transport':['транспорт','метро', 'такси', 'маршрутка', 'автобус'],
-    'clothes' : ['одежда', 'шмотки', 'обувь'],
+    'food':['магазин', 'еда', 'продукты', 'памперсы', 'аптека'],
+    'transport':['транспорт', 'метро', 'такси', 'маршрутка', 'автобус'],
+    'clothes' : ['одежда', 'обувь'],
     'communications' : ['связь', 'телефон', 'интернет', 'билайн'],
-    'baby' : ['ребенок', 'ребёнок', 'малыш', 'памперсы', 'подгузники', 'смесь'],
     'money_transfer' : ['переводы', 'перевод', 'скинул', 'перевел', 'перевёл'],
     'apartments' : ['квартира', 'мебель', 'леруа'],
-    'pharmacy' : ['аптека', 'таблетки'],
     'gos_uslugi' : ['налоги', 'квартплата'],
     'auto' : ['автомобиль', 'веста', 'авто', 'машина', 'бензин', 'запчасти'],
-    'trip' : ['путешествия', 'арзамас', 'питер'],
-    'restaurant' : ['ресторан', 'кафе', 'кофе', 'шаверма'],
+    'restaurant' : ['кафе', 'ресторан', 'кофе', 'шаверма'],
     'other' : ['другое']
 }
 
 # looking for category and send parsed message to db
-def add_expense(users_message):
+def add_expense(users_message, user_id):
     parsed_message = parse_message(users_message)
     find_categories = add_categories(parsed_message[0])
-    send_exp_cat_in_db = db.add_expense_and_category_in_db(parsed_message[1], find_categories)
+    send_exp_cat_in_db = db.add_expense_and_category_to_db(parsed_message[1], find_categories, user_id)
             
     return f'Ваш расход - {parsed_message[1]}р. добавлен в категорию {categories[find_categories][0]}!'
 
@@ -47,7 +44,6 @@ def add_categories(first_part_message):
                 return f"Такой категории нет..."
 
 
-def show_all_categories_to_user():
-    for cat_key in categories:
-        print (f"{categories[cat_key]} : {categories[cat_key]}")
-        return f"{categories[cat_key]}"
+#def show_all_categories_to_user():
+    #for cat_key in categories:
+    #    return f'{categories[cat_key][0]} : {categories[cat_key]}'

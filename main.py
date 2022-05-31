@@ -34,12 +34,12 @@ async def show_all_categories(message: types.Message):
     This handler will be called when user sends `/categories'
     """
     for cat_key in expenses.categories:
-        show_all_categories = f"{expenses.categories[cat_key]}"
+        show_all_categories = f"• {expenses.categories[cat_key][0]} ({', '.join(expenses.categories[cat_key])})"
         await message.answer(
             f"{show_all_categories}\n"
             )
     await message.answer(
-        "Пример добавления расхода: 'такси 50'\n"
+        'Пример добавления расхода:  "магазин 50",  "Телефон 330"\n'
         )
     
 
@@ -48,15 +48,19 @@ async def show_all_categories(message: types.Message):
 @dp.message_handler()
 async def add_expense(message: types.Message):
     try:
-        expense = expenses.add_expense(message.text)
-        text_answer = f'Готово! {expense}'
+        expense = expenses.add_expense(message.text, message.from_user.id)
+        text_answer = f'Готово, {message.from_user.first_name}! {expense}' 
         await message.answer(text_answer)
     except:
         await message.reply(
             "Что-то пошло не так, попробуйте снова😔\n"
-            "Пример добавления расхода: 'такси 50'\n"
+            'Пример добавления расхода: "такси 50"\n'
             "Посмотреть все категории: '/categories'\n"
             )
+
+@dp.message_handler(commands=['expenses'])
+async def show_expense_for_period():
+    pass
     
 
         
