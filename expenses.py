@@ -15,7 +15,7 @@ categories = {
     'gos_uslugi' : ['налоги', 'квартплата'],
     'auto' : ['автомобиль', 'веста', 'авто', 'машина', 'бензин', 'запчасти'],
     'restaurant' : ['кафе', 'ресторан', 'кофе', 'шаверма'],
-    'other' : ['другое']
+    'other' : ['другое', 'ерунда']
 }
 
 # looking for category and send parsed message to db
@@ -44,6 +44,5 @@ def add_categories(first_part_message):
                 return f"Такой категории нет..."
 
 
-#def show_all_categories_to_user():
-    #for cat_key in categories:
-    #    return f'{categories[cat_key][0]} : {categories[cat_key]}'
+def get_expenses_for_period(user_id):
+    pass

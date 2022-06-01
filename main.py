@@ -4,6 +4,7 @@ from config import TOKEN
 import logging
 from aiogram import Bot, Dispatcher, executor, types
 import expenses
+import db
 
 
 
@@ -24,7 +25,7 @@ async def send_welcome(message: types.Message):
     await message.reply(
         "Добро пожаловать!\n"
         "I'm MoneyKeeperBot!😊\n"
-        "Пример добавления расхода: 'такси 50'\n"
+        'Пример добавления расхода:  "магазин 50",  "Такси 200"\n'
         "Посмотреть все категории: '/categories'\n"
         )
 
@@ -34,16 +35,14 @@ async def show_all_categories(message: types.Message):
     This handler will be called when user sends `/categories'
     """
     for cat_key in expenses.categories:
-        show_all_categories = f"• {expenses.categories[cat_key][0]} ({', '.join(expenses.categories[cat_key])})"
+        show_all_categories = f"• {expenses.categories[cat_key][0]} ({', '.join(expenses.categories[cat_key][1:])})"
         await message.answer(
-            f"{show_all_categories}\n"
+            f"{show_all_categories}"
             )
     await message.answer(
-        'Пример добавления расхода:  "магазин 50",  "Телефон 330"\n'
+        'Пример добавления расхода:  "магазин 50",  "Такси 200"\n'
         )
     
-
-
 # handling users message
 @dp.message_handler()
 async def add_expense(message: types.Message):
@@ -54,13 +53,17 @@ async def add_expense(message: types.Message):
     except:
         await message.reply(
             "Что-то пошло не так, попробуйте снова😔\n"
-            'Пример добавления расхода: "такси 50"\n'
+            'Пример добавления расхода:  "магазин 50",  "Такси 200"\n'
             "Посмотреть все категории: '/categories'\n"
+            "Посмотреть последние расходы: '/expenses'\n"
             )
 
 @dp.message_handler(commands=['expenses'])
-async def show_expense_for_period():
-    pass
+async def get_expense(message: types.Message):
+    show_expense = db.get_expense(message.from_user.id)
+    await message.answer(
+        f"Проверка"
+    )
     
 
         
