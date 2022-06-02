@@ -9,16 +9,16 @@ cur.execute("""CREATE TABLE IF NOT EXISTS users(
 """)
 
 cur.execute("""CREATE TABLE IF NOT EXISTS expenses(
-    user_id,
-    id PRIMARY KEY,
-    food,
-    transport,
-    clothes,
-    communications,
-    money_transfer,
-    apartments,
-    gos_uslugi,
-    auto,
-    restaurant,
-    other);
+    user_id INTEGER,
+    id PRIMARY KEY ,
+    food INTEGER,
+    transport INTEGER,
+    clothes INTEGER,
+    communications INTEGER,
+    money_transfer INTEGER,
+    apartments INTEGER,
+    gos_uslugi INTEGER,
+    auto INTEGER,
+    restaurant INTEGER,
+    other INTEGER);
 """)

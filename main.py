@@ -42,7 +42,18 @@ async def show_all_categories(message: types.Message):
     await message.answer(
         'Пример добавления расхода:  "магазин 50",  "Такси 200"\n'
         )
-    
+
+@dp.message_handler(commands=['expenses'])
+async def get_expense_to_user(message: types.Message):
+    try:
+        show_expense = db.get_expense(message.from_user.id)
+        await message.answer(
+            f'Пожалуйста, укажите период: "месяц", "неделя", "день".\n'
+            f"{show_expense}"
+        )
+    except:
+        pass
+
 # handling users message
 @dp.message_handler()
 async def add_expense(message: types.Message):
@@ -58,12 +69,7 @@ async def add_expense(message: types.Message):
             "Посмотреть последние расходы: '/expenses'\n"
             )
 
-@dp.message_handler(commands=['expenses'])
-async def get_expense(message: types.Message):
-    show_expense = db.get_expense(message.from_user.id)
-    await message.answer(
-        f"Проверка"
-    )
+
     
 
         
