@@ -46,7 +46,7 @@ async def show_all_categories(message: types.Message):
 @dp.message_handler(commands=['expenses'])
 async def get_expense_to_user(message: types.Message):
     try:
-        show_expense = db.get_expense(message.from_user.id)
+        show_expense = db.get_expense('food', message.from_user.id)
         await message.answer(
             f'Пожалуйста, укажите период: "месяц", "неделя", "день".\n'
             f"{show_expense}"

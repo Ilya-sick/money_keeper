@@ -1,7 +1,7 @@
 #money_keeper
 
 import db
-
+import datetime as dt
 from unicodedata import category
 
 
@@ -23,8 +23,9 @@ def add_expense(users_message, user_id):
     parsed_message = parse_message(users_message)
     find_categories = add_categories(parsed_message[0])
     send_exp_cat_in_db = db.add_expense_and_category_to_db(parsed_message[1], find_categories, user_id)
+    get_exp = db.get_expense(find_categories, user_id)
             
-    return f'Ваш расход - {parsed_message[1]}р. добавлен в категорию {categories[find_categories][0]}!'
+    return f'Ваш расход - {parsed_message[1]}р. добавлен в категорию {categories[find_categories][0]}!\nВсего: {get_exp}р.'
 
 
 def parse_message(users_message):
@@ -44,5 +45,8 @@ def add_categories(first_part_message):
                 return f"Такой категории нет..."
 
 
-def get_expenses_for_period(user_id):
-    pass
+#def get_expenses_for_period(find_categories, user_id):
+    #return db.get_expense(find_categories, user_id)
+    
+#moscow_time = dt.datetime.utcnow() 
+#print(moscow_time)
