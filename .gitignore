@@ -1,0 +1,6 @@
+expenses.db
+config.py
+**/__pycache__
+*.log
+desktop.ini
+expenses.db-journal

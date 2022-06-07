@@ -46,10 +46,9 @@ async def show_all_categories(message: types.Message):
 @dp.message_handler(commands=['expenses'])
 async def get_expense_to_user(message: types.Message):
     try:
-        show_expense = db.get_expense('food', message.from_user.id)
+        show_expense = expenses.get_expenses_for_period(message.from_user.id)
         await message.answer(
-            f'Пожалуйста, укажите период: "месяц", "неделя", "день".\n'
-            f"{show_expense}"
+            f"Всего/месяц: {show_expense}р."
         )
     except:
         pass
@@ -59,7 +58,7 @@ async def get_expense_to_user(message: types.Message):
 async def add_expense(message: types.Message):
     try:
         expense = expenses.add_expense(message.text, message.from_user.id)
-        text_answer = f'Готово, {message.from_user.first_name}! {expense}' 
+        text_answer = f'{message.from_user.first_name}, {expense}' 
         await message.answer(text_answer)
     except:
         await message.reply(

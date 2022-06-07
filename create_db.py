@@ -10,7 +10,8 @@ cur.execute("""CREATE TABLE IF NOT EXISTS users(
 
 cur.execute("""CREATE TABLE IF NOT EXISTS expenses(
     user_id INTEGER,
-    id PRIMARY KEY ,
+    id PRIMARY KEY,
+    date_time INTEGER,
     food INTEGER,
     transport INTEGER,
     clothes INTEGER,
