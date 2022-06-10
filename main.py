@@ -23,10 +23,11 @@ async def send_welcome(message: types.Message):
     This handler will be called when user sends `/start` or `/help` command
     """
     await message.reply(
-        "Добро пожаловать!\n"
-        "I'm MoneyKeeperBot!😊\n"
-        'Пример добавления расхода:  "магазин 50",  "Такси 200"\n'
-        "Посмотреть все категории: '/categories'\n"
+        f"Добро пожаловать, {message.from_user.first_name}!\n"
+        "I'm MoneyKeeperBot!😊\n\n"
+        'Пример добавления расхода:  <b><i>"магазин 50"</i></b>,  "<b><i>Такси 200</i></b>"\n\n'
+        "Посмотреть все категории: /categories\n", 
+        parse_mode=types.ParseMode.HTML
         )
 
 @dp.message_handler(commands=['categories'])
@@ -35,20 +36,41 @@ async def show_all_categories(message: types.Message):
     This handler will be called when user sends `/categories'
     """
     for cat_key in expenses.categories:
-        show_all_categories = f"• {expenses.categories[cat_key][0]} ({', '.join(expenses.categories[cat_key][1:])})"
+        show_all_categories = f"• <b>{expenses.categories[cat_key][0]}</b> ({', '.join(expenses.categories[cat_key][1:])})"
         await message.answer(
-            f"{show_all_categories}"
+            f"{show_all_categories}", 
+            parse_mode=types.ParseMode.HTML
             )
     await message.answer(
-        'Пример добавления расхода:  "магазин 50",  "Такси 200"\n'
+        'Пример добавления расхода:  <b><i>"магазин 50"</i></b>,  "<b><i>Такси 200</i></b>"\n'
+        "Посмотреть статистику: /statistics\n", 
+        parse_mode=types.ParseMode.HTML
         )
 
-@dp.message_handler(commands=['expenses'])
-async def get_expense_to_user(message: types.Message):
+@dp.message_handler(commands = ['statistics'])
+async def get_statistics_to_user(message: types.Message):
     try:
-        show_expense = expenses.get_expenses_for_period(message.from_user.id)
+        for category in expenses.categories.keys():
+            show_stat = expenses.get_statistics(message.from_user.id, category)
+            show_expense_per_month = expenses.get_all_expenses_for_month(message.from_user.id)
+            await message.answer(
+                show_stat, 
+                parse_mode=types.ParseMode.HTML
+                )
         await message.answer(
-            f"Всего/месяц: {show_expense}р."
+            f"• <b>всего</b> (месяц): {show_expense_per_month}", 
+            parse_mode=types.ParseMode.HTML
+            )
+    except:
+        pass
+    
+@dp.message_handler(commands=['del'])
+async def del_last_expense(message: types.Message):
+    try:
+        del_last_exp = expenses.del_last_expenses(message.from_user.id)
+        await message.answer(
+            del_last_exp,
+            parse_mode= types.ParseMode.HTML
         )
     except:
         pass
@@ -58,14 +80,14 @@ async def get_expense_to_user(message: types.Message):
 async def add_expense(message: types.Message):
     try:
         expense = expenses.add_expense(message.text, message.from_user.id)
-        text_answer = f'{message.from_user.first_name}, {expense}' 
-        await message.answer(text_answer)
+        text_answer = f"{message.from_user.first_name}, {expense}\nпосмотреть все категории:  /categories\nпосмотреть статистику:  /statistics\n\nудалить последний расход:  /del\n"
+        await message.answer(text_answer, parse_mode=types.ParseMode.HTML)
     except:
         await message.reply(
             "Что-то пошло не так, попробуйте снова😔\n"
-            'Пример добавления расхода:  "магазин 50",  "Такси 200"\n'
-            "Посмотреть все категории: '/categories'\n"
-            "Посмотреть последние расходы: '/expenses'\n"
+            'Пример добавления расхода:  <b><i>"магазин 50"</i></b>,  "<b><i>Такси 200</i></b>"\n'
+            "Посмотреть все категории: /categories\n", 
+            parse_mode=types.ParseMode.HTML
             )
 
 
