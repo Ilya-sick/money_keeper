@@ -6,6 +6,7 @@ Telegram Bot for accounting user`s expenses.
 Bot created for users, who like Telegram and simle interface.
 
 Category:
+
 • <b>магазин</b> (еда, продукты, памперсы, аптека)
 
 • <b>транспорт</b> (метро, такси, маршрутка, автобус)
