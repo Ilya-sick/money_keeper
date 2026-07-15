@@ -42,6 +42,21 @@ def get_statistics(user_id, category, date_time_start):
                 sum += element_categories
     return sum
 
+def get_largest_payment_per_month(user_id, category, date_time_start):
+    cur.execute(
+        f"SELECT {category} "
+        f"FROM expenses "
+        f"WHERE user_id = {user_id} "
+        f"ORDER BY {category} DESC LIMIT 1"
+        )
+    for categories in cur.fetchall():
+        # print(categories)
+        for largest_payment in categories:
+            if largest_payment != None:
+                # print(largest_payment)
+                return largest_payment
+
+
 def find_and_del_last_expense(user_id):
     cur.execute(
         f"SELECT date_time "

@@ -63,6 +63,24 @@ async def get_statistics_to_user(message: types.Message):
             )
     except:
         pass
+
+@dp.message_handler(commands = ['largest_payment'])
+async def get_largest_payment_to_user(message: types.Message):
+    try:
+        for category in expenses.categories.keys():
+            # show_stat = expenses.get_statistics(message.from_user.id, category)
+            show_largest_payment_per_month = expenses.get_largest_payment_per_month(message.from_user.id, category)
+        # await message.answer(
+                # show_stat, 
+                # parse_mode=types.ParseMode.HTML
+                # )
+            await message.answer(
+                f"• Наибольшая трата в категории <b>{expenses.categories[category][0]}</b>: <b>{show_largest_payment_per_month}</b>р.", 
+                parse_mode=types.ParseMode.HTML
+                )
+    except:
+        pass
+
     
 @dp.message_handler(commands=['del'])
 async def del_last_expense(message: types.Message):

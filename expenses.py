@@ -80,7 +80,19 @@ def get_statistics(user_id, category):
     sum_month_stat = db.get_statistics(user_id, category, day_start_month)
     sum_day_stat = db.get_statistics(user_id, category, day_start_today)
     return f"• <b>{categories[category][0]}</b> (день/<b>месяц</b>) : {sum_day_stat}/<b>{sum_month_stat}</b>"
+
+def get_largest_payment_per_month(user_id, category):
+    day_start_month = get_date_start_month()
+    # for category in categories.keys():
+        # print(category)
+        # print(db.get_largest_payment_per_month(user_id, category, day_start_month))
+    largest_payment = db.get_largest_payment_per_month(user_id, category, day_start_month)
+    return int(largest_payment)
         
+
+    
+
+
          
 def del_last_expenses(user_id):
     delete_exp = db.find_and_del_last_expense(user_id)
