@@ -31,6 +31,8 @@ Category:
 
 For starting send command "/_start_".
 
+!["/_start_"](image.png)
+
 For viewing all categories send "/_categories_".
 
 For saving expenses, send message to MoneyKeeperBot in format: "category expense" (_for example_: "Магазин 200", "такси 180", "шАвЕрМа 150"). Not case sensitive.
