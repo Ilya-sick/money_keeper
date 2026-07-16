@@ -61,4 +61,4 @@ Library: aiogram, sqlite3
 
 DataBase: SQLite
 
-# Simply and easily!
+# MIR
