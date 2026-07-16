@@ -17,6 +17,7 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
+
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
     """
@@ -29,6 +30,7 @@ async def send_welcome(message: types.Message):
         "Посмотреть все категории: /categories\n", 
         parse_mode=types.ParseMode.HTML
         )
+    
 
 @dp.message_handler(commands=['categories'])
 async def show_all_categories(message: types.Message):
@@ -47,6 +49,7 @@ async def show_all_categories(message: types.Message):
         "Наибольшая трата за все время по категориям: /largest_payment\n", 
         parse_mode=types.ParseMode.HTML
         )
+    
 
 @dp.message_handler(commands = ['statistics'])
 async def get_statistics_to_user(message: types.Message):
@@ -69,16 +72,12 @@ async def get_statistics_to_user(message: types.Message):
     except:
         pass
 
+
 @dp.message_handler(commands = ['largest_payment'])
 async def get_largest_payment_to_user(message: types.Message):
     try:
         for category in expenses.categories.keys():
-            # show_stat = expenses.get_statistics(message.from_user.id, category)
             show_largest_payment_per_month = expenses.get_largest_payment_per_month(message.from_user.id, category)
-        # await message.answer(
-                # show_stat, 
-                # parse_mode=types.ParseMode.HTML
-                # )
             await message.answer(
                 f"• Наибольшая трата в категории <b>{expenses.categories[category][0]}</b>: <b>{show_largest_payment_per_month}</b>р.", 
                 parse_mode=types.ParseMode.HTML
@@ -97,6 +96,7 @@ async def del_last_expense(message: types.Message):
         )
     except:
         pass
+
 
 # handling users message
 @dp.message_handler()
