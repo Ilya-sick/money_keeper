@@ -35,6 +35,8 @@ For starting send command "/_start_".
 
 For viewing all categories send "/_categories_".
 
+!["/_start_"](https://github.com/Ilya-sick/money_keeper/blob/master/images/image_categories.PNG)
+
 For saving expenses, send message to MoneyKeeperBot in format: "category expense" (_for example_: "Магазин 200", "такси 180", "шАвЕрМа 150"). Not case sensitive.
 
 For viewing statistics, choose command "/_statistics_". User gets statistics in format: "category (day/month) : expenses_per_day/expenses_per_month" for all categories (_for example_: • <b>магазин</b> (день/<b>месяц</b>) : 0/<b>200</b>)
