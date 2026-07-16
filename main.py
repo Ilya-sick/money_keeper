@@ -43,7 +43,8 @@ async def show_all_categories(message: types.Message):
             )
     await message.answer(
         'Пример добавления расхода:  <b><i>"магазин 50"</i></b>,  "<b><i>Такси 200</i></b>"\n'
-        "Посмотреть статистику: /statistics\n", 
+        "Посмотреть статистику: /statistics\n"
+        "Наибольшая трата за все время по категориям: /largest_payment\n", 
         parse_mode=types.ParseMode.HTML
         )
 
@@ -59,6 +60,10 @@ async def get_statistics_to_user(message: types.Message):
                 )
         await message.answer(
             f"• <b>всего</b> (месяц): {show_expense_per_month}", 
+            parse_mode=types.ParseMode.HTML
+            )
+        await message.answer(
+            "Наибольшая трата за все время по категориям: /largest_payment\n", 
             parse_mode=types.ParseMode.HTML
             )
     except:
