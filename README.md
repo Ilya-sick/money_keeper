@@ -31,7 +31,7 @@ Category:
 
 For starting send command "/_start_".
 
-!["/_start_"]([image.png](https://github.com/Ilya-sick/money_keeper/blob/master/image_start.png))
+!["/_start_"](https://github.com/Ilya-sick/money_keeper/blob/master/image_start.png)
 
 For viewing all categories send "/_categories_".
 
